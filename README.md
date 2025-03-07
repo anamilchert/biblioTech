@@ -6,7 +6,8 @@ Seu sistema de bibliotecas!
 Para garantir um desenvolvimento eficiente e organizado, adotaremos as seguintes estratégias:
 
 - **Gerenciamento de Projeto:** Utilizaremos o **JIRA** para planejar, acompanhar e documentar tarefas, facilitando a colaboração e a transparência entre os membros da equipe.
-- **Versionamento de Código:** O código será versionado utilizando **Git**, armazenado em um repositório no GitHub/GitLab para controle de mudanças e colaboração.
+  ## Link do JIRA: https://anamilchert.atlassian.net/jira/software/projects/DW21/boards/5
+- **Versionamento de Código:** O código será versionado utilizando **Git**, armazenado em um repositório para controle de mudanças e colaboração.
 - **Deploys Semanais:** Realizaremos **deploys semanais**, garantindo que novas funcionalidades e correções de bugs sejam entregues de forma constante e segura.
 
 ## 2. Arquitetura do Sistema
