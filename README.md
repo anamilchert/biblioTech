@@ -30,6 +30,32 @@ O **BiblioTech** adotará uma **arquitetura monolítica**, na qual o frontend e 
 ### Banco de Dados:
 - **MongoDB**: Banco de dados NoSQL baseado em documentos, flexível para armazenar informações de livros, usuários e transações.
 
-Essa abordagem permite um desenvolvimento eficiente e organizado, garantindo que o **BiblioTech** seja escalável e mantenha um alto desempenho.
+## 4. Requisitos Funcionais
+
+- **Cadastro de novos livros:** O sistema deve permitir o cadastro de livros com informações como título, autor, gênero e ano de publicação.
+- **Listagem de todos os livros:** O sistema deve exibir uma lista de todos os livros cadastrados, com informações detalhadas.
+- **Edição das informações de um livro:** O sistema deve permitir a edição das informações de um livro já cadastrado, como título, autor e status de disponibilidade.
+- **Exclusão de um livro:** O sistema deve permitir a exclusão de um livro do banco de dados.
+- **Indicar se o livro está disponível ou não:** O sistema deve mostrar se o livro está disponível para empréstimo ou já foi emprestado.
+- **Registrar empréstimo para usuários:** O sistema deve registrar quando um usuário realiza o empréstimo de um livro.
+- **Impedir empréstimo de livros já emprestados:** O sistema deve impedir que um livro seja emprestado novamente enquanto não for devolvido.
+- **Registro de devolução:** O sistema deve permitir registrar quando um livro é devolvido.
+- **Atualizar o status do livro:** O sistema deve atualizar o status de um livro (disponível/emprestado) após a devolução.
+
+Essas funcionalidades garantirão o controle adequado de livros e empréstimos, permitindo uma gestão eficiente da biblioteca.
+
+## 5. Requisitos Não Funcionais
+
+Os requisitos não funcionais definem as características do sistema e como ele deve se comportar, além das expectativas de desempenho e qualidade. Para o **BiblioTech**, os seguintes requisitos não funcionais são necessários:
+
+- **Desempenho:**  
+  O sistema deve ser capaz de processar e exibir informações de livros e registros de empréstimos em tempo real, com um tempo de resposta inferior a 2 segundos para qualquer ação do usuário.
+- **Escalabilidade:**  
+  O sistema deve ser capaz de crescer e se adaptar à medida que o número de livros e usuários aumenta. A arquitetura deve permitir a adição de novos recursos sem comprometer a performance.
+- **Segurança:**  
+  O sistema deve garantir a segurança dos dados do usuário e dos livros. Senhas devem ser armazenadas de forma segura utilizando criptografia (exemplo: hashing com bcrypt), e a comunicação entre o cliente e o servidor deve ser realizada de forma segura utilizando HTTPS.
+- **Usabilidade:**  
+  A interface do sistema deve ser intuitiva e fácil de usar, com uma navegação clara e design responsivo que se adapte a diferentes dispositivos (desktop e mobile).
+
 
   por Ana Luisa Milchert
