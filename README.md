@@ -47,8 +47,6 @@ Essas funcionalidades garantirão o controle adequado de livros e empréstimos, 
 
 ## 5. Requisitos Não Funcionais
 
-Os requisitos não funcionais definem as características do sistema e como ele deve se comportar, além das expectativas de desempenho e qualidade. Para o **BiblioTech**, os seguintes requisitos não funcionais são necessários:
-
 - **Desempenho:**  
   O sistema deve ser capaz de processar e exibir informações de livros e registros de empréstimos em tempo real, com um tempo de resposta inferior a 2 segundos para qualquer ação do usuário.
 - **Escalabilidade:**  
