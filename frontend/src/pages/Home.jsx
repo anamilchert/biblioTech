@@ -12,7 +12,10 @@ const Home = () => {
         <Link to="/loan">
           <button style={styles.button}>Registrar Empréstimo</button>
         </Link>
-      </div>
+       </div>
+       <Link to="/book-form">
+          <button style={styles.button}>Cadastrar Novo Livro</button>
+         </Link>
     </div>
   );
 };
