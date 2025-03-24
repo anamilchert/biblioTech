@@ -1,8 +1,8 @@
 import { useState } from "react";
-import axios from "axios";
+import styled from "styled-components";
 
 const BookForm = () => {
-  const [formData, setFormData] = useState({
+  const [book, setBook] = useState({
     title: "",
     author: "",
     genre: "",
@@ -10,118 +10,137 @@ const BookForm = () => {
     quantity: "",
   });
 
-  // Atualizar os dados do formulário
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setBook({ ...book, [e.target.name]: e.target.value });
   };
 
-  // Submeter o formulário para criar um livro
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    const response = await fetch("http://localhost:5000/api/books", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(book),
+    });
 
-    const bookData = {
-      title: formData.title,
-      author: formData.author,
-      genre: formData.genre,
-      publishedYear: formData.publishedYear,
-      quantity: formData.quantity,
-    };
-
-    try {
-      const response = await axios.post("http://localhost:5000/books", bookData);
+    if (response.ok) {
       alert("Livro cadastrado com sucesso!");
-      // Limpar o formulário após o envio
-      setFormData({
-        title: "",
-        author: "",
-        genre: "",
-        publishedYear: "",
-        quantity: "",
-      });
-    } catch (error) {
-      console.error("Erro ao cadastrar o livro", error);
-      alert("Erro ao cadastrar o livro");
+      setBook({ title: "", author: "", genre: "", publishedYear: "", quantity: "" });
+    } else {
+      alert("Erro ao cadastrar o livro.");
     }
   };
 
   return (
-    <div style={styles.container}>
-      <h1>Cadastrar Livro</h1>
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <div style={styles.formGroup}>
-          <label htmlFor="title">Título</label>
-          <input
+    <Container>
+      <FormContainer>
+        <Title>Cadastro de Livro</Title>
+        <Form onSubmit={handleSubmit}>
+          <Label>Título</Label>
+          <Input
             type="text"
-            id="title"
             name="title"
-            value={formData.title}
+            value={book.title}
             onChange={handleChange}
             required
           />
-        </div>
 
-        <div style={styles.formGroup}>
-          <label htmlFor="author">Autor</label>
-          <input
+          <Label>Autor</Label>
+          <Input
             type="text"
-            id="author"
             name="author"
-            value={formData.author}
+            value={book.author}
             onChange={handleChange}
             required
           />
-        </div>
 
-        <div style={styles.formGroup}>
-          <label htmlFor="genre">Gênero</label>
-          <input
+          <Label>Gênero</Label>
+          <Input
             type="text"
-            id="genre"
             name="genre"
-            value={formData.genre}
+            value={book.genre}
             onChange={handleChange}
-            required
           />
-        </div>
 
-        <div style={styles.formGroup}>
-          <label htmlFor="publishedYear">Ano de Publicação</label>
-          <input
+          <Label>Ano de Publicação</Label>
+          <Input
             type="number"
-            id="publishedYear"
             name="publishedYear"
-            value={formData.publishedYear}
+            value={book.publishedYear}
             onChange={handleChange}
-            required
           />
-        </div>
 
-        <div style={styles.formGroup}>
-          <label htmlFor="quantity">Quantidade</label>
-          <input
+          <Label>Quantidade</Label>
+          <Input
             type="number"
-            id="quantity"
             name="quantity"
-            value={formData.quantity}
+            value={book.quantity}
             onChange={handleChange}
             required
           />
-        </div>
 
-        <button type="submit" style={styles.button}>
-          Cadastrar Livro
-        </button>
-      </form>
-    </div>
+          <Button type="submit">Cadastrar</Button>
+        </Form>
+      </FormContainer>
+    </Container>
   );
 };
 
-const styles = {
-  container: { padding: "20px" },
-  form: { display: "flex", flexDirection: "column", maxWidth: "400px", margin: "0 auto" },
-  formGroup: { marginBottom: "15px" },
-  button: { padding: "10px", cursor: "pointer", background: "#007bff", color: "#fff", border: "none", borderRadius: "5px" },
-};
-
 export default BookForm;
+
+// 🔹 ESTILIZAÇÃO COM STYLED-COMPONENTS 🔹
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #f4f4f4;
+`;
+
+const FormContainer = styled.div`
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 400px;
+`;
+
+const Title = styled.h2`
+  text-align: center;
+  color: #333;
+  margin-bottom: 1rem;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Label = styled.label`
+  font-weight: bold;
+  margin-top: 10px;
+`;
+
+const Input = styled.input`
+  padding: 8px;
+  margin: 5px 0 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+`;
+
+const Button = styled.button`
+  background: #4caf50;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+
+  &:hover {
+    background: #45a049;
+  }
+`;

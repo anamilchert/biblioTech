@@ -7,7 +7,7 @@ const Home = () => {
     
       <div style={styles.buttons}>
         <Link to="/books">
-          <button style={styles.button}>Ir para Lista de Livros</button>
+          <button style={styles.button}>Lista de Livros</button>
         </Link>
         <Link to="/loan">
           <button style={styles.button}>Registrar Empréstimo</button>
