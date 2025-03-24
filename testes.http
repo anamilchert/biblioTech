@@ -1,0 +1,32 @@
+### Teste para a criação de um livro
+POST http://localhost:5000/api/books
+Content-Type: application/json
+
+{
+  "title": "O Senhor dos Anéis",
+  "author": "J.R.R. Tolkien",
+  "genre": "Fantasia",
+  "publishedYear": 1954,
+  "quantity": 5
+}
+
+### Teste para listar livros (GET)
+GET http://localhost:5000/api/books
+
+### Teste para obter detalhes de um livro específico (GET)
+GET http://localhost:5000/api/books/67e19a523710dd3f2d880103
+
+### Teste para atualizar um livro (PUT)
+PUT http://localhost:5000/api/books/67e19a523710dd3f2d880103
+Content-Type: application/json
+
+{
+  "title": "O Senhor dos Anéis: A Sociedade do Anel",
+  "author": "J.R.R. Tolkien",
+  "genre": "Fantasia",
+  "publishedYear": 1954,
+  "quantity": 10
+}
+
+### Teste para deletar um livro (DELETE)
+DELETE http://localhost:5000/api/books/{id-do-livro}
