@@ -3,7 +3,7 @@ POST http://localhost:5000/api/books
 Content-Type: application/json
 
 {
-  "title": "O Senhor dos Anéis",
+  "title": "O poder do habito",
   "author": "J.R.R. Tolkien",
   "genre": "Fantasia",
   "publishedYear": 1954,
@@ -21,7 +21,7 @@ PUT http://localhost:5000/api/books/67e19a523710dd3f2d880103
 Content-Type: application/json
 
 {
-  "title": "O Senhor dos Anéis: A Sociedade do Anel",
+  "title": "O Senhor dos Anéis",
   "author": "J.R.R. Tolkien",
   "genre": "Fantasia",
   "publishedYear": 1954,
@@ -29,4 +29,4 @@ Content-Type: application/json
 }
 
 ### Teste para deletar um livro
-DELETE http://localhost:5000/api/books/{id-do-livro}
+DELETE http://localhost:5000/api/books/67e19a523710dd3f2d880103

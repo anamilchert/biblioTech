@@ -16,7 +16,7 @@ const BookForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     const response = await fetch("http://localhost:5000/api/books", {
       method: "POST",
       headers: {
@@ -36,7 +36,7 @@ const BookForm = () => {
   return (
     <Container>
       <FormContainer>
-        <Title>Cadastro de Livro</Title>
+        <Title>📚 Cadastro de Livro</Title>
         <Form onSubmit={handleSubmit}>
           <Label>Título</Label>
           <Input
@@ -90,13 +90,12 @@ const BookForm = () => {
 
 export default BookForm;
 
-// 🔹 ESTILIZAÇÃO COM STYLED-COMPONENTS 🔹
 const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: #f4f4f4;
+  background: #f7f9fc;
 `;
 
 const FormContainer = styled.div`
@@ -105,42 +104,56 @@ const FormContainer = styled.div`
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   width: 400px;
+  text-align: center;
 `;
 
 const Title = styled.h2`
-  text-align: center;
-  color: #333;
-  margin-bottom: 1rem;
+  color: #004085;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
 `;
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
+  gap: 15px;
 `;
 
 const Label = styled.label`
   font-weight: bold;
   margin-top: 10px;
+  color: #333;
 `;
 
 const Input = styled.input`
-  padding: 8px;
-  margin: 5px 0 10px;
-  border: 1px solid #ccc;
+  padding: 12px;
+  font-size: 16px;
   border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
+  width: 100%;
+  outline: none;
+  transition: 0.3s;
+
+  &:focus {
+    border: 1px solid #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
 `;
 
 const Button = styled.button`
-  background: #4caf50;
-  color: white;
-  padding: 10px;
+  padding: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  background: #007bff;
+  color: #fff;
   border: none;
   border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  margin-top: 10px;
+  width: 100%;
+  transition: 0.3s;
 
   &:hover {
-    background: #45a049;
+    background: #0056b3;
   }
 `;
