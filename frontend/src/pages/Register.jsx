@@ -17,7 +17,7 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Usuário cadastrado:", formData);
-    navigate("/login"); // redireciona para o login após cadastro
+    navigate("/login");
   };
 
   return (

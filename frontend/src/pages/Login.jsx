@@ -4,7 +4,6 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    // Aqui você poderia validar o login, usar context ou localStorage
     navigate("/home");
   };
 

@@ -116,7 +116,6 @@ const styles = {
   },
 };
 
-// Estilos interativos (em CSS real usaria `:hover`, aqui só como dica)
 styles.loginButton[':hover'] = {
   backgroundColor: "#0056b3",
 };
