@@ -6,7 +6,8 @@ const BookSchema = new mongoose.Schema({
     genre: { type: String },
     publishedYear: { type: Number },
     quantity: { type: Number, required: true, min: 0 },
-    createdAt: { type: Date, default: Date.now }
+    createdAt: { type: Date, default: Date.now },
+    available: { type: Boolean, default: true },
   });
   
   module.exports = mongoose.model('Book', BookSchema);

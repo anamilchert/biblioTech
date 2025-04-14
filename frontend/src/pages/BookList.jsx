@@ -1,31 +1,70 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const BookList = () => {
-  const [books, setBooks] = useState([
-    { id: 1, title: "O Senhor dos Anéis", author: "J.R.R. Tolkien", available: true },
-    { id: 2, title: "1984", author: "George Orwell", available: false },
-    { id: 3, title: "Dom Casmurro", author: "Machado de Assis", available: true }
-  ]);
-
+  const [books, setBooks] = useState([]);
   const [editingBookId, setEditingBookId] = useState(null);
   const [editedBook, setEditedBook] = useState({ title: "", author: "", available: true });
 
+  const fetchBooks = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/api/books");
+      const data = await response.json();
+      setBooks(data);
+    } catch (error) {
+      console.error("Erro ao buscar livros:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchBooks();
+  }, []);
+
   const handleEditClick = (book) => {
-    setEditingBookId(book.id);
+    setEditingBookId(book._id);
     setEditedBook({ ...book });
   };
 
-  const handleSaveClick = () => {
-    setBooks((prevBooks) =>
-      prevBooks.map((book) =>
-        book.id === editingBookId ? { ...editedBook } : book
-      )
-    );
-    setEditingBookId(null);
+  const handleSaveClick = async () => {
+    try {
+      await fetch(`http://localhost:5000/api/books/${editingBookId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(editedBook),
+      });
+      setEditingBookId(null);
+      fetchBooks();
+    } catch (error) {
+      console.error("Erro ao atualizar livro:", error);
+    }
   };
 
-  const handleDelete = (id) => {
-    setBooks((prevBooks) => prevBooks.filter((book) => book.id !== id));
+  const handleDelete = async (id) => {
+    try {
+      await fetch(`http://localhost:5000/api/books/${id}`, {
+        method: "DELETE",
+      });
+      fetchBooks();
+    } catch (error) {
+      console.error("Erro ao excluir livro:", error);
+    }
+  };
+
+  const handleLoan = async (bookId) => {
+    try {
+      const res = await fetch("http://localhost:5000/api/loan", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId: "USER_ID_HERE", bookId }),
+      });
+
+      if (res.ok) {
+        fetchBooks(); // Atualiza a lista de livros após o empréstimo
+      } else {
+        console.error("Erro ao registrar empréstimo");
+      }
+    } catch (error) {
+      console.error("Erro ao registrar empréstimo:", error);
+    }
   };
 
   const handleChange = (e) => {
@@ -41,8 +80,8 @@ const BookList = () => {
       <h1 style={styles.title}>Livros</h1>
       <ul style={styles.list}>
         {books.map((book) => (
-          <li key={book.id} style={styles.item}>
-            {editingBookId === book.id ? (
+          <li key={book._id} style={styles.item}>
+            {editingBookId === book._id ? (
               <div>
                 <input
                   type="text"
@@ -58,15 +97,9 @@ const BookList = () => {
                   onChange={handleChange}
                   style={styles.input}
                 />
-                <label style={styles.checkboxLabel}>
-                  <input
-                    type="checkbox"
-                    name="available"
-                    checked={editedBook.available}
-                    onChange={handleChange}
-                  />
-                  Disponível
-                </label>
+                <div style={styles.status}>
+                  {book.available ? "Disponível" : "Emprestado"}
+                </div>
                 <button onClick={handleSaveClick} style={styles.saveButton}>Salvar</button>
               </div>
             ) : (
@@ -74,11 +107,14 @@ const BookList = () => {
                 <strong style={styles.bookTitle}>{book.title}</strong>
                 <span style={styles.author}> - {book.author}</span>
                 <div style={styles.status}>
-                  {book.available ? " Disponível" : " Emprestado"}
+                  {book.status === "borrowed" ? "Emprestado" : "Disponível"}
                 </div>
                 <div style={styles.actions}>
+                  {book.status === "available" && (
+                    <button onClick={() => handleLoan(book._id)} style={styles.loanButton}>Emprestar</button>
+                  )}
                   <button onClick={() => handleEditClick(book)} style={styles.editButton}>Editar</button>
-                  <button onClick={() => handleDelete(book.id)} style={styles.deleteButton}>Excluir</button>
+                  <button onClick={() => handleDelete(book._id)} style={styles.deleteButton}>Excluir</button>
                 </div>
               </>
             )}
@@ -161,14 +197,16 @@ const styles = {
     borderRadius: "4px",
     border: "1px solid #ccc",
   },
-  checkboxLabel: {
-    fontSize: "14px",
-    display: "block",
-    marginBottom: "10px",
-    color: "#004080",
-  },
   saveButton: {
     backgroundColor: "#28a745",
+    color: "#fff",
+    border: "none",
+    padding: "6px 12px",
+    borderRadius: "4px",
+    cursor: "pointer",
+  },
+  loanButton: {
+    backgroundColor: "#007bff",
     color: "#fff",
     border: "none",
     padding: "6px 12px",
