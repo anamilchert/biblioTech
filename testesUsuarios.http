@@ -1,0 +1,15 @@
+### Criar novo usuário
+POST http://localhost:5000/api/users
+Content-Type: application/json
+
+{
+  "name": "João da Silva",
+  "email": "joao@example.com",
+  "password": "senha123"
+}
+
+### Listar todos os usuários
+GET http://localhost:5000/api/users
+
+### Obter usuário por ID
+GET http://localhost:5000/api/users/{}

@@ -1,0 +1,17 @@
+### Teste para criar um empréstimo
+POST http://localhost:5000/api/loans
+Content-Type: application/json
+
+{
+  "user": "67fd645649f53019fc5e8460",  
+  "book": "67fd4fd949f53019fc5e8408" 
+}
+
+### Teste para listar todos os empréstimos
+GET http://localhost:5000/api/loans
+
+### Teste para obter detalhes de um empréstimo específico
+GET http://localhost:5000/api/loans/67e19a523710dd3f2d880103  // Substitua por um ID de empréstimo válido
+
+### Teste para deletar um empréstimo
+DELETE http://localhost:5000/api/loans/67e19a523710dd3f2d880103  // Substitua por um ID de empréstimo válido
