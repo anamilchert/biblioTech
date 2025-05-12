@@ -58,7 +58,7 @@ const BookList = () => {
       });
 
       if (res.ok) {
-        fetchBooks(); // Atualiza a lista de livros após o empréstimo
+        fetchBooks();
       } else {
         console.error("Erro ao registrar empréstimo");
       }
@@ -107,12 +107,9 @@ const BookList = () => {
                 <strong style={styles.bookTitle}>{book.title}</strong>
                 <span style={styles.author}> - {book.author}</span>
                 <div style={styles.status}>
-                  {book.status === "borrowed" ? "Emprestado" : "Disponível"}
+                  {book.available ? "Disponível" : "Emprestado"}
                 </div>
                 <div style={styles.actions}>
-                  {book.status === "available" && (
-                    <button onClick={() => handleLoan(book._id)} style={styles.loanButton}>Emprestar</button>
-                  )}
                   <button onClick={() => handleEditClick(book)} style={styles.editButton}>Editar</button>
                   <button onClick={() => handleDelete(book._id)} style={styles.deleteButton}>Excluir</button>
                 </div>
@@ -124,6 +121,7 @@ const BookList = () => {
     </div>
   );
 };
+
 
 const styles = {
   container: {

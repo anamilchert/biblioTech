@@ -6,12 +6,16 @@ const createLoan = async (req, res) => {
 
   try {
     const bookExists = await Book.findById(book);
-    if (!bookExists) {
-      return res.status(404).json({ message: 'Livro não encontrado.' });
+
+    if (!bookExists || !bookExists.available) {
+      return res.status(400).json({ message: 'Livro indisponível para empréstimo.' });
     }
 
     const newLoan = new Loan({ user, book });
     await newLoan.save();
+
+    bookExists.available = false;
+    await bookExists.save();
 
     return res.status(201).json({ message: 'Empréstimo registrado com sucesso!' });
   } catch (err) {
