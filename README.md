@@ -2,6 +2,14 @@
 # BiblioTech
 Seu sistema de bibliotecas!
 
+## Para Iniciar o front:
+- cd frontend
+- npm run dev
+
+## Para iniciar o back:
+- cd backend
+- node server.js
+
 ## 1. Estratégias de Desenvolvimento
 Para garantir um desenvolvimento eficiente e organizado, adotaremos as seguintes estratégias:
 
