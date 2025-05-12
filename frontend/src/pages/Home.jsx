@@ -23,6 +23,9 @@ const Home = () => {
           <Link to="/book-form">
             <button style={styles.button}>➕ Cadastrar Novo Livro</button>
           </Link>
+          <Link to="/return">
+           <button style={styles.button}>📥 Devolver Livro</button>
+         </Link>
         </div>
       </main>
 

@@ -1,7 +1,8 @@
 const express = require('express');
 const {
   createLoan,
-  // getLoans,
+  returnLoan,
+  getLoans,
   // getLoanById,
   // updateLoan,
   // deleteLoan
@@ -10,7 +11,8 @@ const {
 const router = express.Router();
 
 router.post('/loans', createLoan);
-// router.get('/loans', getLoans);
+router.post('/loan/return/:loanId', returnLoan);
+router.get('/loans', getLoans);
 // router.get('/loans/:id', getLoanById);
 // router.put('/loans/:id', updateLoan);
 // router.delete('/loans/:id', deleteLoan);

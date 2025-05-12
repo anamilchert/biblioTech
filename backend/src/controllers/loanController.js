@@ -24,4 +24,42 @@ const createLoan = async (req, res) => {
   }
 };
 
-module.exports = { createLoan };
+const returnLoan = async (req, res) => {
+  const { loanId } = req.params;
+
+  try {
+    const loan = await Loan.findById(loanId).populate('book');
+    if (!loan) {
+      return res.status(404).json({ message: 'Empréstimo não encontrado.' });
+    }
+
+    const book = await Book.findById(loan.book._id);
+    if (book) {
+      book.available = true;
+      await book.save();
+    }
+
+    await Loan.findByIdAndDelete(loanId);
+
+    return res.status(200).json({ message: 'Livro devolvido com sucesso!' });
+  } catch (err) {
+    console.error('Erro ao devolver livro:', err);
+    return res.status(500).json({ message: 'Erro ao devolver livro.' });
+  }
+};
+
+const getLoans = async (req, res) => {
+  try {
+    const loans = await Loan.find().populate('book');
+    res.status(200).json(loans);
+  } catch (err) {
+    console.error('Erro ao buscar empréstimos:', err);
+    res.status(500).json({ message: 'Erro ao buscar empréstimos.' });
+  }
+};
+
+module.exports = {
+  createLoan,
+  returnLoan,
+  getLoans
+};
