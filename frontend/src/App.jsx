@@ -5,6 +5,7 @@ import LandingPage from "./pages/LandingPage";
 import BookForm from "./pages/BookForm";
 import BookList from "./pages/BookList";
 import LoanForm from "./pages/LoanForm";
+import ReturnBookPage from "./pages/ReturnBook";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/book-form" element={<BookForm />} />
         <Route path="/books" element={<BookList />} />
         <Route path="/loan" element={<LoanForm />} />
+        <Route path="/loan/return" element={<ReturnBookPage />}/>
       </Routes>
     </Router>
   );
