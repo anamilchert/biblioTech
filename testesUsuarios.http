@@ -3,9 +3,9 @@ POST http://localhost:5000/api/users
 Content-Type: application/json
 
 {
-  "name": "João da Silva",
-  "email": "joao@example.com",
-  "password": "senha123"
+  "name": "João pereira",
+  "email": "joao@gmail.com",
+  "password": "senha12345"
 }
 
 ### Listar todos os usuários

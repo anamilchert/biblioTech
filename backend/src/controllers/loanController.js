@@ -50,7 +50,7 @@ const returnLoan = async (req, res) => {
 
 const getLoans = async (req, res) => {
   try {
-    const loans = await Loan.find().populate('book');
+    const loans = await Loan.find().populate('book').populate('user');
     res.status(200).json(loans);
   } catch (err) {
     console.error('Erro ao buscar empréstimos:', err);

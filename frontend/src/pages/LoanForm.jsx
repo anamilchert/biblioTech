@@ -7,10 +7,26 @@ const LoanForm = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     fetchBooks();
-  }, []);
+    fetchUsers();
+  }, []); 
+
+  const fetchUsers = async () => {
+    try {
+      const res = await fetch("http://localhost:5000/api/users");
+      if (!res.ok) {
+        throw new Error("Erro ao carregar os usuários");
+      }
+      const data = await res.json();
+      setUsers(data);
+    } catch (err) {
+      console.error("Erro ao buscar usuários:", err);
+      setError("Não foi possível carregar os usuários.");
+    }
+  };
 
   const fetchBooks = async () => {
     try {
@@ -58,14 +74,23 @@ const LoanForm = () => {
       {loading && <p>Carregando livros...</p>}
       {error && <p style={styles.errorMessage}>{error}</p>}
       <form onSubmit={handleSubmit} style={styles.form}>
-        <input
-          type="text"
-          placeholder="ID do usuário"
-          value={userId}
-          onChange={(e) => setUserId(e.target.value)}
-          required
-          style={styles.input}
-        />
+        <select
+        value={userId}
+        onChange={(e) => setUserId(e.target.value)}
+        required
+        style={styles.input}
+        >
+     <option value="">Selecione um usuário</option>
+     {users.length > 0 ? (
+      users.map((user) => (
+      <option key={user._id} value={user._id}>
+        {user.name}
+      </option>
+      ))
+    ) : (
+    <option disabled>Nenhum usuário disponível</option>
+    )}
+       </select>
         <select
           value={bookId}
           onChange={(e) => setBookId(e.target.value)}
