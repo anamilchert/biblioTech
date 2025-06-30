@@ -14,10 +14,26 @@ const Register = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Usuário cadastrado:", formData);
-    navigate("/login");
+    try {
+      const res = await fetch("http://localhost:5000/api/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (res.ok) {
+        console.log("Usuário cadastrado com sucesso!");
+        navigate("/login");
+      } else {
+        console.error("Erro ao cadastrar usuário");
+      }
+    } catch (error) {
+      console.error("Erro ao cadastrar usuário:", error);
+    }
   };
 
   return (

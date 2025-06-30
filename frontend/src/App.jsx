@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 import LandingPage from "./pages/LandingPage";
 import BookForm from "./pages/BookForm";
 import BookList from "./pages/BookList";
@@ -13,6 +14,7 @@ function App() {
       <Routes>
       <Route path="/" element={<LandingPage/>} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/home" element={<Home />} />
         <Route path="/book-form" element={<BookForm />} />
         <Route path="/books" element={<BookList />} />
